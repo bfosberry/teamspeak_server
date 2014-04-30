@@ -1,0 +1,17 @@
+{
+  "info" : {
+    "name" : "teeamspeak3",
+    "version" : "3.0.10.3",
+    "arch" : "amd64",
+    "docker_recipe" : "bfosberry/teamspeak"
+  },
+  "requires" : [],
+  "provides" : [
+    { "status": "string"},
+    { "username": "string"},
+    { "password": "string"},
+    { "admin_token": "string"},
+    { "docker_id": "string"},
+    { "error": "string"}
+  ]
+}
