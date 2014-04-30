@@ -14,6 +14,7 @@ SERVER_ID=$1
 PORT=9987
 SLEEP_INTERVAL=5
 ETCDCTL_COMMAND="/opt/etcd/etcdctl -peers $HOST_IP:4001"
+DATA_FOLDER="/opt/data/"
 
 function report_error {
   echo "Error: $1"
@@ -35,18 +36,28 @@ function get_action {
   $ETCDCTL_COMMAND rm $SERVER_ID/action
 }
 
+function initialize_data_folder {
+    mkdir -p "$DATA_FOLDER/state"
+    mkdir -p "$DATA_FOLDER/logs"
+    if [ ! -f "$DATA_FOLDER/state/ts3server.sqlitedb" ]; then
+      touch "$DATA_FOLDER/state/ts3server.sqlitedb"
+    fi
+}
+
 
 if [ -z $SERVER_ID ]; then
   echo "No Server Id provided"
   exit 1
 fi
 
+initialize_data_folder
+
 # Write Config
 # The etcd host is available via the HOST_IP env variable
 # Teamspeak configuration is does at runtime and so no steps are needed here
 
 # Start Container
-$DIR/ts3server_startscript.sh start &> $DIR/logs/stderr.log
+$DIR/ts3server_startscript.sh start &>> $DIR/logs/stderr.log
 
 # Extract the admin token
 ATTEMPTS=0
