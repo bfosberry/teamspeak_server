@@ -13,10 +13,10 @@
     { "admin_token": "string"},
     { "docker_id": "string"},
     { "error": "string"}
-  ]
+  ],
   "responds_to" : [
     { "action": "string" }
-  ] 
+  ],
   "ports" : [
     { "9987/upd"  : "ts3 port" },
     { "10011/tcp" : "ts3 query port" },
