@@ -5,21 +5,57 @@
     "arch" : "amd64",
     "docker_recipe" : "bfosberry/teamspeak"
   },
-  "requires" : [],
+  "requires" : [
+  ],
   "provides" : [
-    { "status": "string"},
-    { "username": "string"},
-    { "password": "string"},
-    { "admin_token": "string"},
-    { "docker_id": "string"},
-    { "error": "string"}
+    { "name" : "Status",
+      "data_type" : "string",
+      "key" : "status",
+      "default_value" : "Initializing",
+      "visible" : true
+    },
+    { "name" : "Username",
+      "data_type" : "string",
+      "key" : "username",
+      "default_value" : "",
+      "visible" : true
+    },
+    { "name" : "Password",
+      "data_type" : "string",
+      "key" : "password",
+      "default_value" : "",
+      "visible" : true
+    },
+    { "name" : "Admin Token",
+      "data_type" : "string",
+      "key" : "admin_token",
+      "default_value" : "",
+      "visible" : true
+    },
+    { "name" : "Error",
+      "data_type" : "string",
+      "key" : "error",
+      "default_value" : "",
+      "visible" : false
+    }
   ],
   "responds_to" : [
-    { "action": "string" }
+    { "name": "Restart",
+      "key": "restart",
+      "type": "bool" },
+    { "name": "Delete Logs",
+      "key": "delete_logs",
+      "type": "bool" },
+    { "name": "Reset",
+      "key": "reset",
+      "type": "bool" }
   ],
   "ports" : [
-    { "9987/upd"  : "ts3 port" },
-    { "10011/tcp" : "ts3 query port" },
-    { "30033/tcp" : "ts3 data port" }
+    { "port" : "9987/upd", 
+      "name": "Ts3 port" },
+    { "port": "10011/tcp", 
+      "name" :"Ts3 query port" },
+    { "port": "30033/tcp", 
+      "name": "Ts3 data port" }
   ]
 }

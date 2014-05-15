@@ -1,6 +1,6 @@
-#cloud-config
-
 coreos:
+  update:
+    reboot-strategy: off
   etcd:
       #generate a new token for each unique cluster from https://discovery.etcd.io/new
       #discovery: https://discovery.etcd.io/<token>
@@ -9,6 +9,28 @@ coreos:
   units:
     - name: etcd.service
       command: start
+    - name: docker-tcp.socket
+      command: start
+      content: |
+        [Unit]
+        Description=Docker Socket for the API
+
+        [Socket]
+        ListenStream=4243
+        Service=docker.service
+        BindIPv6Only=both
+
+        [Install]
+        WantedBy=sockets.target
+    - name: enable-docker-tcp.service
+      command: start
+      content: |
+        [Unit]
+        Description=Enable the Docker Socket for the API
+
+        [Service]
+        Type=oneshot
+        ExecStart=/usr/bin/systemctl enable docker-tcp.socket
     - name: fleet.service
       command: start
       runtime: no
