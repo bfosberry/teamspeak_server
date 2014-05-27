@@ -5,8 +5,6 @@
     "arch" : "amd64",
     "docker_recipe" : "bfosberry/teamspeak"
   },
-  "requires" : [
-  ],
   "provides" : [
     { "name" : "Status",
       "data_type" : "string",
@@ -51,7 +49,7 @@
       "type": "bool" }
   ],
   "ports" : [
-    { "port" : "9987/upd", 
+    { "port" : "9987/udp", 
       "name": "Ts3 port" },
     { "port": "10011/tcp", 
       "name" :"Ts3 query port" },
