@@ -13,7 +13,7 @@ DIR=/opt/teamspeak3-server
 SERVER_ID=$1
 PORT=9987
 SLEEP_INTERVAL=5
-ETCDCTL_COMMAND="/opt/etcd/etcdctl -peers $HOST_IP:4001"
+ETCDCTL_COMMAND="/opt/etcd/etcdctl -peers $ETCD_SERVER"
 DATA_FOLDER="/opt/data/"
 
 function report_error {
@@ -91,7 +91,7 @@ fi
 initialize_data_folder
 
 # Write Config
-# The etcd host is available via the HOST_IP env variable
+# The etcd host is available via the ETCD_SERVER env variable
 # Teamspeak configuration is does at runtime and so no steps are needed here
 
 # Start Container

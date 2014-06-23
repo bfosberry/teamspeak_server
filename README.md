@@ -22,7 +22,7 @@ In order to be compatible, the container must do the following
 ## Configuration
 
 This teamspeak server takes no configuration parameters, however, as with all containers
-it requires the HOST_IP to be provided so it can access etcd
+it requires the ETCD_SERVER (e.g. 1.2.3.4:4001) to be provided so it can access etcd
 
 ## Info
 
@@ -69,14 +69,14 @@ It should be possible to run this container with the following commands
 
 ```
 docker build -t teamspeak .
-docker run -d -t teamspeak -e "HOST_IP=1.2.3.4" -v /opt/data "$SERVER_ID"
+docker run -d -t teamspeak -e "ETCD_SERVER=1.2.3.4:4001" -v /opt/data "$SERVER_ID"
 ```
 
 A vagrant box with coreos is provided. To get started locally run
 ```
 $ vagrant up #or if it is already up and you have made a change, vagrant provision
 core$ docker build -t teamspeak .
-core$ docker run -d -t -v "/data/$SERVER_ID:/opt/data" -e "HOST_IP=1.2.3.4" -t teamspeak $SERVER_ID
+core$ docker run -d -t -v "/data/$SERVER_ID:/opt/data" -e "ETCD_SERVER=1.2.3.4:4001" -t teamspeak $SERVER_ID
 core$ etcdtl get $SERVER_ID/info/status
 running
 core$ etcdtl get $SERVER_ID/info/password
