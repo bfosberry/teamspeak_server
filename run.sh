@@ -9,6 +9,10 @@
 # 5) Watches for light-restart events and restarts the app
 # Required HOST_ID, first arg should be SERVER_ID
 
+if [ -z "$ETCD_SERVER" ]; then
+  ETCD_SERVER="$ETCD_1_PORT_4001_TCP_ADDR:$ETCD_1_PORT_4001_TCP_PORT"
+fi
+
 DIR=/opt/teamspeak3-server
 SERVER_ID=$1
 PORT=9987
