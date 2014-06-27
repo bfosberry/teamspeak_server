@@ -17,7 +17,7 @@ DIR=/opt/teamspeak3-server
 SERVER_ID=$1
 PORT=9987
 SLEEP_INTERVAL=5
-ETCDCTL_COMMAND="/opt/etcd/etcdctl --no-sync --peers $ETCD_SERVER"
+ETCDCTL_COMMAND="/opt/etcd/etcdctl --no-sync --peers http://$ETCD_SERVER"
 DATA_FOLDER="/opt/data/"
 
 function report_error {
