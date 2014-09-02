@@ -10,7 +10,8 @@
 # Required HOST_ID, first arg should be SERVER_ID
 
 if [ -z "$ETCD_SERVER" ]; then
-  ETCD_SERVER="$ETCD_1_PORT_4001_TCP_ADDR:$ETCD_1_PORT_4001_TCP_PORT"
+  echo "ETCD_SERVER variable not set"
+  exit 1
 fi
 
 DIR=/opt/teamspeak3-server
@@ -65,8 +66,6 @@ function initialize_data_folder {
 
 function parse_token {
   while [ -z "`grep -R "token\=" $DIR/logs/stderr.log`" ]; do
-    echo "Checking logs......."
-    cat $DIR/logs/stderr.log
     if [ $ATTEMPTS -lt $MAX_ATTEMPTS ]; then 
       sleep 1
       #echo "Waiting for token, Attempt $ATTEMPTS"
