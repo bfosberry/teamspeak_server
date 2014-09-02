@@ -64,8 +64,9 @@ function initialize_data_folder {
 }
 
 function parse_token {
-  cat $DIR/logs/stderr.log
   while [ -z "`grep -R "token\=" $DIR/logs/stderr.log`" ]; do
+    echo "Checking logs......."
+    cat $DIR/logs/stderr.log
     if [ $ATTEMPTS -lt $MAX_ATTEMPTS ]; then 
       sleep 1
       #echo "Waiting for token, Attempt $ATTEMPTS"
