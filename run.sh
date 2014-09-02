@@ -105,7 +105,7 @@ $DIR/ts3server_startscript.sh start &>> $DIR/logs/stderr.log
 
 # Extract the admin token
 ATTEMPTS=0
-MAX_ATTEMPTS=10
+MAX_ATTEMPTS=20
 while [ ! -e $DIR/logs/stderr.log ]; do
   echo "Waiting for stderr.log"
   sleep 1
