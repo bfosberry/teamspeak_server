@@ -1,0 +1,7 @@
+#!/bin/bash
+# @author bfosberry
+
+DATA_FOLDER=/opt/data/
+if [ ! -f "$DATA_FOLDER/state/ts3server.sqlitedb" ]; then
+  touch "$DATA_FOLDER/state/ts3server.sqlitedb"
+fi

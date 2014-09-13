@@ -1,0 +1,67 @@
+#!/bin/bash
+# @author bfosberry
+
+ACTION_KEY="$1"
+ACTION_VALUE="$2"
+MAX_ATTEMPTS=30
+
+DIR=/opt/teamspeak3-server
+DATA_DIR=/opt/data
+
+function parse_token {
+  ATTEMPTS=0
+  while [ -z "`grep -R "token\=" $DATA_DIR/logs/stderr.log`" ]; do
+    if [ $ATTEMPTS -lt $MAX_ATTEMPTS ]; then 
+      sleep 1
+      ATTEMPTS=$((ATTEMPTS+1))
+    else 
+      report_error "Unable to parse admin token"
+      exit 1
+    fi
+  done
+
+  TOKEN=`grep -R "token\=" $DATA_DIR/logs/stderr.log | sed 's/.*token\=\([^ ]*\).*/\1/'`
+  USERNAME=`grep -R "loginname\=" $DATA_DIR/logs/stderr.log | sed 's/.*loginname\=\ \"\([^ \,\"]*\).*/\1/'`
+  PASSWORD=`grep -R "password\=" $DATA_DIR/logs/stderr.log | sed 's/.*password\=\ \"\([^ \,\"]*\).*/\1/'`
+}
+
+function check_data {
+  error_regex="Key not found"
+  if [ "$1" == "" ] || [[ "$1" =~ $error_regex ]]; then
+    parse_token
+  fi
+}
+
+function maybe_reset_value {
+  if [ "$1" == "admin_token" ]; then
+    VALUE=$TOKEN
+  elif [ "$1" == "username" ]; then
+    VALUE=$USERNAME
+  elif [ "$1" == "password" ]; then
+    VALUE=$PASSWORD
+  fi
+}
+
+function maybe_parse {
+  VALUE=`get_info_value "$1"`
+  check_data "$VALUE"
+  maybe_reset_value $1
+  set_info_value "$1" "$VALUE"
+}
+
+function post_start {
+  maybe_parse "admin_token"
+  maybe_parse "username"
+  maybe_parse "password"
+}
+
+if [ "$ACTION_KEY" == "start" ]; then
+    set_info_value "status" "Starting"
+    $DIR/ts3server_startscript.sh start &>> $DATA_DIR/logs/stderr.log
+    set_info_value "status" "Running"
+    post_start
+elif [[ "$ACTION_KEY" == "stop" ]]; then
+    set_info_value "status" "Stopping"
+    $DIR/ts3server_startscript.sh stop
+    set_info_value "status" "Stopped"
+fi
