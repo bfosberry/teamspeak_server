@@ -7,22 +7,21 @@ A standard teamspeak docker server compatible with the gamekick project
 
 In order to be compatible, the container must do the following
 
-* Take one single argument, the ID of the server
-* The entrypoint should be blocking
-* The entrypoint can configure the server through any means it wishes (chef, puppet, shell)
-* It must pull in any configuration variables from etcd using etcdctl
-* It must update etcd with any information it can acquire
-* What configuration is pulled in and what information it can update is defined in metadata.json
-* It must set the key $SERVER_ID/info/status to running|errored|stopped|restarting|configuring
-* It must maintain cleanliness of its etcd data, through cleansing and ttl
-* It must support polling the actions folder and responding to the halt message as a precursor to the container being stopped or removed
-* It must report errors/status changes under any form of server error
-* It must initialize its /opt/data folder with the correct structure and content
+* Have the SERVER_ID environment variable with an ID
+* Have the ETCD_SERVER environment variable with a host:port
+* No entrypoint defined
+* It can provide an optional script "initialize_game_folder", to prep the filesystem beyond the Dockerfile
+* It can provide an optional "write_config" script to apply the provided configuration to the game server config files
+* It must provide a "game_server_action" script which responds to the actions defined in metadata.json
+* It must provide a "game_server_online" script that exits 0 when game server is running
+* It must report application information by calling "set_info_value key value"
+* It can report a halting error by calling "report_error error_text"
+* It must respond to the action "halt" and  cleanly shut down
 
 ## Configuration
 
 This teamspeak server takes no configuration parameters, however, as with all containers
-it requires the ETCD_SERVER (e.g. 1.2.3.4:4001) to be provided so it can access etcd
+it requires the ETCD_SERVER (e.g. 1.2.3.4:4001) to be provided so it can access etcd. It also required "SERVER_ID" to it can namespace info and actions correctly.
 
 ## Info
 
@@ -69,14 +68,14 @@ It should be possible to run this container with the following commands
 
 ```
 docker build -t teamspeak .
-docker run -d -t teamspeak -e "ETCD_SERVER=1.2.3.4:4001" -v /opt/data "$SERVER_ID"
+docker run -d -t teamspeak -e "ETCD_SERVER=1.2.3.4:4001" -e "SERVER_ID=$SERVER_ID" -v /opt/data
 ```
 
 A vagrant box with coreos is provided. To get started locally run
 ```
 $ vagrant up #or if it is already up and you have made a change, vagrant provision
 core$ docker build -t teamspeak .
-core$ docker run -d -t -v "/data/$SERVER_ID:/opt/data" -e "ETCD_SERVER=1.2.3.4:4001" -t teamspeak $SERVER_ID
+core$ docker run -d -t -v "/data/$SERVER_ID:/opt/data" -e "ETCD_SERVER=1.2.3.4:4001" -e "SERVER_ID=$SERVER_ID" -t teamspeak
 core$ etcdtl get $SERVER_ID/info/status
 running
 core$ etcdtl get $SERVER_ID/info/password
