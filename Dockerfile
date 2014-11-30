@@ -20,6 +20,8 @@ RUN mkdir -p $DATA_FOLDER/state
 
 WORKDIR /opt/teamspeak3-server
 
+VOLUME /opt/data
+
 # expose the teamspeak ports
 EXPOSE 9987/udp
 EXPOSE 10011
