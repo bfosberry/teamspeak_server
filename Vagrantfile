@@ -8,9 +8,9 @@ Vagrant.configure("2") do |config|
     app.vm.provider "docker" do |d|
       d.build_dir = "./"
       d.name =  "teamspeak"
-      d.cmd = ["1235"]
       d.env = {
-        "ETCD_SERVER" => "172.17.8.101:4001"
+        "ETCD_SERVER" => "172.17.8.101:4001",
+        "SERVER_ID" => "1233"
       }
     end
   end
