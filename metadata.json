@@ -6,12 +6,6 @@
     "docker_recipe" : "bfosberry/teamspeak"
   },
   "provides" : [
-    { "name" : "Status",
-      "data_type" : "string",
-      "key" : "status",
-      "default_value" : "Initializing",
-      "visible" : true
-    },
     { "name" : "Username",
       "data_type" : "string",
       "key" : "username",
@@ -38,15 +32,10 @@
     }
   ],
   "responds_to" : [
-    { "name": "Restart",
-      "key": "restart",
-      "type": "bool" },
-    { "name": "Delete Logs",
-      "key": "delete_logs",
-      "type": "bool" },
-    { "name": "Reset",
-      "key": "reset",
-      "type": "bool" }
+    { "name": "Decom",
+      "key": "decom",
+      "args": []
+    }
   ],
   "ports" : [
     { "port" : "9987/udp", 

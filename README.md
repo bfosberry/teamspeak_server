@@ -16,7 +16,7 @@ In order to be compatible, the container must do the following
 ## Configuration
 
 This teamspeak server takes no configuration parameters, however, as with all containers
-it requires the ETCD_SERVER (e.g. 1.2.3.4:4001) to be provided so it can access etcd. It also required "SERVER_ID" to it can namespace info and actions correctly.
+it requires the ETCD_SERVER (e.g. 1.2.3.4:4001) to be provided so it can access communicate. It also required "SERVER_ID" to it can namespace info and actions correctly.
 
 ## Info
 
@@ -24,6 +24,8 @@ This teamspeak server writes the following info to the logs and stdout:
 * username
 * password
 * admin_token
+
+This data can be collected into etcd using the watcher container in /watcher. This should be run as a separate container and will update etcd /_$SERVER_ID/info/key with the relevant value as it changes (every 5 seconds)
 
 ## Ports
 
@@ -61,3 +63,5 @@ core$ docker rm 0bedb
 ```
 
 This should start and maintain the teamspeak server, exiting if the teamspeak server dies.
+
+The controller container should be run alongside when other actions are needed it supports only decomissioning. This will delete the relevant datastore as defined in the configuration, as well as the logs. This should be run after a container and it's data wish to be destroyed, or when a datastore is being moved (migrating to/from mysql).
