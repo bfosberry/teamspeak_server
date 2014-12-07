@@ -5,7 +5,6 @@
 FROM bfosberry/gamekick_base
 MAINTAINER bfosberry
 
-
 # install teamspeak
 ENV TS3_VERSION 3.0.11.1
 RUN wget -q http://dl.4players.de/ts/releases/$TS3_VERSION/teamspeak3-server_linux-amd64-$TS3_VERSION.tar.gz
