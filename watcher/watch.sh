@@ -26,6 +26,11 @@ function set_value {
   $ETCDCTL_COMMAND set "_$SERVER_ID/info/$1" "$2" > /dev/null
 }
 
+function do_exit {
+  exit 1
+}
+
+trap do_exit SIGINT SIGTERM
 
 while true; do
   check_logs
@@ -45,6 +50,5 @@ while true; do
     set_value "password" $PASSWORD
   fi
   
-  #TODO handle signals
   sleep $SLEEP_INTERVAL
 done
