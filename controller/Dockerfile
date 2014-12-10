@@ -5,6 +5,7 @@
 FROM bfosberry/gamekick_base
 MAINTAINER bfosberry
 
+USER root
 RUN apt-get update -y && apt-get install -y mysql-client
 
 VOLUME /opt/data
