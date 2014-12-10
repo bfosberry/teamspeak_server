@@ -1,6 +1,7 @@
 #!/bin/bash
 # @author bfosberry
 
+sudo chown -R appuser:appuser /opt/data
 mkdir -p /opt/data/state/
 mkdir -p /opt/data/logs/
 touch /opt/data/state/ts3server.sqlitedb

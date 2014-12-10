@@ -8,9 +8,8 @@ MAINTAINER bfosberry
 # install teamspeak
 ENV TS3_VERSION 3.0.11.1
 ENV TS3_DIR /opt/teamspeak3-server
-RUN mkdir -p $TS3_DIR
 RUN wget -O /tmp/teamspeak-server.tar.gz http://dl.4players.de/ts/releases/$TS3_VERSION/teamspeak3-server_linux-amd64-$TS3_VERSION.tar.gz
-RUN tar -xf /tmp/teamspeak-server.tar.gz -C $TS3_DIR
+RUN tar -xf /tmp/teamspeak-server.tar.gz -C /opt && mv /opt/teamspeak3-server_linux-amd64 $TS3_DIR
 
 #RUN rm teamspeak3-server_linux-amd64-$TS3_VERSION.tar.gz
 
