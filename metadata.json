@@ -4,8 +4,8 @@
     "version" : "3.0.10.3",
     "arch" : "amd64",
     "docker_repo" : "bfosberry/teamspeak",
-    "watcher_repo" : "bfosberry/teamspeak:watcher",
-    "controller_repo" : "bfosberry/teamspeak:controller"
+    "watcher_repo" : "bfosberry/teamspeak_watcher",
+    "controller_repo" : "bfosberry/teamspeak_controller"
   },
   "provides" : [
     { "name" : "Username",
