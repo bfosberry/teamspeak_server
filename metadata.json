@@ -40,11 +40,17 @@
     }
   ],
   "ports" : [
-    { "port" : "9987/udp", 
-      "name": "Ts3 port" },
-    { "port": "10011/tcp", 
-      "name" :"Ts3 query port" },
-    { "port": "30033/tcp", 
-      "name": "Ts3 data port" }
+    { "port" : "9987",
+      "protocol": "udp",
+      "name": "Ts3 port",
+      "dynamic": true },
+    { "port": "10011",
+      "protocol": "tcp",
+      "name" :"Ts3 query port",
+      "dynamic": true },
+    { "port": "30033",
+      "protocol": "tcp",
+      "name": "Ts3 data port",
+      "dynamic": true }
   ]
 }
