@@ -29,3 +29,5 @@ EXPOSE 30033
 
 # add the runner script
 ADD ./scripts /opt/teamspeak3-server/scripts
+ADD ./confd /opt/teamspeak3-server/confd
+

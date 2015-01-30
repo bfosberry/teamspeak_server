@@ -6,3 +6,6 @@ mkdir -p /opt/data/state/
 mkdir -p /opt/data/logs/
 touch /opt/data/state/ts3server.sqlitedb
 ln -s /opt/data/state/ts3server.sqlitedb /opt/teamspeak3-server/ts3server.sqlitedb
+
+confd -verbose -onetime -backend env -confdir /opt/teamspeak3-server/confd/
+

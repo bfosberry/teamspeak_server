@@ -1,0 +1,8 @@
+[template]
+src = "ts3server.ini.tmpl"
+dest = "/opt/teamspeak3-server/ts3server.ini"
+keys = [
+  "/10011/TCP/PORT",
+  "/30033/TCP/PORT",
+  "/9987/UDP/PORT"
+]

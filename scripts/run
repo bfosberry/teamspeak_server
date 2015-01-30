@@ -4,4 +4,4 @@
 SERVER_DIR=/opt/teamspeak3-server
 DATA_DIR=/opt/data
 export LD_LIBRARY_PATH=$SERVER_DIR
-$SERVER_DIR/ts3server_linux_amd64 2>&1 | tee $DATA_DIR/logs/stderr.log
+$SERVER_DIR/ts3server_linux_amd64  inifile=/opt/teamspeak3-server/ts3server.ini logpath=/opt/data/logs disable_db_logging=0 2>&1 | tee $DATA_DIR/logs/stderr.log
