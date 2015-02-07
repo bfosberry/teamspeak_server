@@ -1,7 +1,7 @@
 {
   "info" : {
     "name" : "teamspeak3",
-    "version" : "3.0.10.3",
+    "version" : "3.0.11.1",
     "arch" : "amd64",
     "docker_repo" : "bfosberry/teamspeak",
     "watcher_repo" : "bfosberry/teamspeak_watcher",
@@ -42,7 +42,7 @@
   "ports" : [
     { "port" : "9987",
       "protocol": "udp",
-      "name": "Ts3 port",
+      "name": "Ts3 voice Port",
       "dynamic": true },
     { "port": "10011",
       "protocol": "tcp",
@@ -50,7 +50,7 @@
       "dynamic": true },
     { "port": "30033",
       "protocol": "tcp",
-      "name": "Ts3 data port",
+      "name": "Ts3 file transfer port",
       "dynamic": true }
   ]
 }
