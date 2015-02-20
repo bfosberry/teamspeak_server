@@ -6,11 +6,12 @@
     "docker_repo" : "bfosberry/teamspeak",
     "watcher_repo" : "bfosberry/teamspeak_watcher",
     "controller_repo" : "bfosberry/teamspeak_controller",
-    "cpu_share" : 10,
-    "mem_share" : 100,
-    "cpu_shares_per_slot" : 10,
-    "mem_shares_per_slot" : 20
-
+    "shares" : {
+      "cpu_share" : 10,
+      "mem_share" : 100,
+      "cpu_shares_per_slot" : 10,
+      "mem_shares_per_slot" : 20
+    }
   },
   "provides" : [
     { "name" : "Username",
