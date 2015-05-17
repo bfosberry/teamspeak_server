@@ -1,0 +1,22 @@
+server:
+  image: bfosberry/teamspeak
+  ports:
+    - "9987:9987/udp"
+    - "10011:10011/tcp"
+    - "30033:30033"
+  environment:
+    - ETCD_SERVER=1.2.3.4:4001
+    - SERVER_ID=12345abc
+  volumes_from:
+   - storage
+storage:
+  image: bfosberry/gamekick_storage
+watcher:
+  image: bfosberry/teamspeak_watcher
+  links:
+    - server
+  environment:
+    - ETCD_SERVER=1.2.3.4:4001
+    - SERVER_ID=12345abc
+  volumes_from:
+   - server

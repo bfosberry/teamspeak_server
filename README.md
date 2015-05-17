@@ -1,6 +1,8 @@
 teamspeak_server
 ================
 
+[![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/)
+
 A standard teamspeak docker server compatible with the gamekick project
 
 ## Compatibility
