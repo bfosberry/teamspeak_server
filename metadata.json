@@ -6,12 +6,14 @@
     "docker_repo" : "bfosberry/teamspeak",
     "watcher_repo" : "bfosberry/teamspeak_watcher",
     "controller_repo" : "bfosberry/teamspeak_controller",
+    "storage_repo" : "bfosberry/gamekick_storage",
     "shares" : {
-      "cpu_share" : 10,
-      "mem_share" : 100,
+      "cpu_shares" : 10,
+      "mem_shares" : 100,
       "cpu_shares_per_slot" : 10,
       "mem_shares_per_slot" : 20
-    }
+    },
+    "configure_with": "etcd"
   },
   "provides" : [
     { "name" : "Username",
@@ -46,15 +48,15 @@
     }
   ],
   "ports" : [
-    { "port" : "9987",
+    { "port" : 9987,
       "protocol": "udp",
       "name": "Ts3 voice Port",
       "dynamic": true },
-    { "port": "10011",
+    { "port": 10011,
       "protocol": "tcp",
       "name" :"Ts3 query port",
       "dynamic": true },
-    { "port": "30033",
+    { "port": 30033,
       "protocol": "tcp",
       "name": "Ts3 file transfer port",
       "dynamic": true }
